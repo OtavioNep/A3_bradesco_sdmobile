@@ -1,32 +1,29 @@
 - Sistema de Prevenção: Falsas Centrais de Atendimento
 
-Este repositório contém a entrega de Banco de Dados e Back-end do projeto Dual Bradesco.
+Este repositório contém a entrega de Banco de Dados, Back-end e Front-end do projeto Dual Bradesco.
 O sistema foi projetado com arquitetura de Microsserviços e foco em segurança, separando a leitura pública da escrita restrita.
 
 - Estrutura do Projeto (Monorepo)
 
-O repositório está dividido em duas partes principais:
+O repositório está dividido em três partes:
 
-* /banco_de_dados: Contém os scripts de criação do banco de dados relacional (MySQL) e a carga inicial de dados (Seed).
-* /falsas_centrais_api: Contém o código-fonte do Back-end e as configurações de contêiner.
+* banco_de_dados: Contém os scripts de criação do banco de dados relacional (MySQL) e a carga inicial de dados (Seed).
+* falsas_centrais_api: Contém o código-fonte do Back-end e as configurações de contêiner.
+* falsas_centrais_front: Contém o código front-end, fazendo a aplicação rodar via Expo.
 
 - Como executar este projeto
+1. Pré requisitos:
+* Docker desktop (https://www.docker.com/products/docker-desktop/)
+* Expo GO no smartphone Google Play: ((https://play.google.com/store/apps/details?id=host.exp.exponent); Apple App Store (iOS): (https://apps.apple.com/br/app/expo-go/id982107779))
+* O smartphone e o computador devem estar conectados exatamente à mesma rede Wi-Fi.
 
-1. Banco de Dados (Docker)
-Para subir o banco de dados via Docker, execute o seguinte comando no seu terminal:
+2. COnfiguração do IP
+* Abra o arquivo `falsas_centrais_front/src/hooks/useConsultaTelefone.js`.
+* Substitua o IP existente pela numeração do IPv4 da sua máquina local.
+
+3. Construir o ambiente
+* Para subir o ambiente estamos usando o Docker, orquestrado via docker-compose. Execute o seguinte comando no seu terminal, na pasta raiz:
 (bash)
-docker run --name db-falsas-centrais -e MYSQL_ROOT_PASSWORD=senha_root -e MYSQL_DATABASE=db_golpes -p 3306:3306 -d mysql:8.0
+docker-compose up --build
 
-*Após o banco iniciar, execute o script `script.sql` localizado na pasta do banco de dados para criar e popular a tabela.*
-
-2. Back-end API (Local ou Docker)
-A API foi construída em Node.js e configurada para rodar em contêineres para atender aos diferenciais do projeto.
-
-Para rodar via Docker:
-(bash)
-cd falsas_centrais_api
-docker build -t falsas_centrais_api .
-docker run --name container-api -p 3000:3000 -d falsas_centrais_api
-
-
-A API estará disponível para testes de leitura no endereço: `http://localhost:3000/api/telefone/40020022`
+O ambiente será construído automaticamente e você poderá rodar o aplicativo via Expo GO, lendo o QR code gerado no terminal, dentro do App.
