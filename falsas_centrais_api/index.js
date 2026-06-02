@@ -8,7 +8,7 @@ app.use(cors());
 
 // Conexão com o banco de dados
 const dbConfig = {
-    host: 'host.docker.internal', 
+    host: 'db-bradesco', 
     user: 'root',
     password: 'senha_root',
     database: 'db_golpes',

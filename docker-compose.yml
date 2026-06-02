@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  #Banco de Dados MySQL
+  banco_bradesco:
+    image: mysql:8.0
+    container_name: db-bradesco
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: senha_root
+      MYSQL_DATABASE: db_golpes   
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./banco_de_dados/script.sql:/docker-entrypoint-initdb.d/script.sql
+
+  #Back-end (API Node.js)
+  api_bradesco:
+    build: ./falsas_centrais_api
+    container_name: back-bradesco
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - banco_bradesco
+
+  #Front-end (App Expo Mobile)
+  mobile_bradesco:
+    build: ./falsas_centrais_front
+    container_name: front-bradesco
+    ports:
+      - "8081:8081"
+    environment:
+      - REACT_NATIVE_PACKAGER_HOSTNAME=${IP_DA_MAQUINA}
+      - PUBLIC_API_IP=${IP_DA_MAQUINA}
+    depends_on:
+      - api_bradesco
+    stdin_open: true 
+    tty: true
