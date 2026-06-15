@@ -17,7 +17,7 @@ O repositório está dividido em três partes:
 * Expo GO no smartphone Google Play: ((https://play.google.com/store/apps/details?id=host.exp.exponent); Apple App Store (iOS): (https://apps.apple.com/br/app/expo-go/id982107779))
 * O smartphone e o computador devem estar conectados exatamente à mesma rede Wi-Fi.
 
-2. COnfiguração do IP
+2. Configuração do IP
 * Abra o arquivo `falsas_centrais_front/src/hooks/useConsultaTelefone.js`.
 * Substitua o IP existente pela numeração do IPv4 da sua máquina local.
 

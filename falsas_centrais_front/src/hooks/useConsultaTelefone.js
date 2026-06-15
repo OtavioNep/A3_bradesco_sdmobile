@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const IP_MAQUINA = '192.168.15.3'; //subcstituir pelo ip da sua maquina
-const API_URL = `http://${IP_MAQUINA}:3000/api/telefone`;
+const IP_MAQUINA = '20.22.247.37';
+const API_URL = 'http://20.22.247.37:3000';
 
 export const useConsultaTelefone = () => {
   const [dados, setDados] = useState(null);
